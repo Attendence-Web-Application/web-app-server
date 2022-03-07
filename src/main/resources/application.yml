@@ -1,0 +1,28 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/attendance?characterEncoding=utf-8&useSSL=false&serverTimeZone=UTC&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: Jaying.1996
+
+
+    hikari:
+      connection-init-sql: set names utf8mb4
+    tomcat:
+      init-s-q-l: SET NAMES utf8mb4 #这是最重要的一步
+  jpa:
+    properties:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+jasypt:
+  encryptor:
+    password: password
+
