@@ -1,17 +1,20 @@
 package com.example.attendance.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class TestController {
 
     @Autowired
-    TestDao testDao;
+    JpaRepository<Test, Integer> testDao;
+
 
     @GetMapping("/getAll")
     public List getAll(){
@@ -20,7 +23,7 @@ public class TestController {
         return all;
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public Test add(@RequestParam("id") int id,
                     @RequestParam("name") String name,
                     @RequestParam("age") int age){
@@ -31,6 +34,12 @@ public class TestController {
 
         Test save = testDao.save(test);
         return save;
+    }
+
+    @PostMapping(path="/add1", produces = "application/json")
+    public ResponseEntity<Test> add1(@RequestBody Test test){
+        System.out.println("[Create one test]");
+        return new ResponseEntity<>(testDao.save(test), HttpStatus.CREATED);
     }
 
     @GetMapping("/deleteOne")
