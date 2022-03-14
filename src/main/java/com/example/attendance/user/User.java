@@ -18,17 +18,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private int user_id;
+    private int id;
 
     @NotNull
-    private String user_name;
+    private String name;
 
     @NotNull
-    private String user_password;
+    private String password;
 
     @NotNull
-    private String user_email;
+    private String email;
 
     @NotNull
-    private String user_type;
+    private int role_id;
 }
