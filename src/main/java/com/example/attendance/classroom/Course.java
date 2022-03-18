@@ -1,4 +1,4 @@
-package com.example.attendance.user;
+package com.example.attendance.classroom;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,38 +8,38 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.List;
-
-import com.example.attendance.classroom.Course;
+import java.sql.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Data
-public class User {
+@Table(name = "class")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
 
     @NotNull
-    private String name;
+    private String number;
 
     @NotNull
-    private String password;
+    private String title;
 
-    @NotNull
-    private String email;
+    private Date start_date;
 
-    @NotNull
-    private int role_id;
+    private Date end_date;
 
-    @ManyToMany
-    @JoinTable(name = "class_enrolled", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "class_id"))
-    List<Course> enrollClasses;
+    private int size;
+
+    private int attendance_times;
+
+//    @ManyToMany(mappedBy = "enrollClasses")
+//    List<User> enrolled;
 
 //    @JsonIgnore
-//    @OneToMany(mappedBy = "user")
+//    @OneToMany(mappedBy = "class_")
 //    List<ClassEnroll> enrolls;
 }
