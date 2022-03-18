@@ -1,5 +1,6 @@
 package com.example.attendance.user;
 
+import com.example.attendance.exception.NotFoundException;
 import com.example.attendance.services.Services;
 import lombok.AllArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
@@ -25,8 +26,16 @@ public class UserServices implements Services<User> {
     }
 
     @Override
-    public User getById(Integer anId) {
-        return null;
+    public User getById(Integer id) {
+        if(!userDao.existsById(id)){
+            throw new NotFoundException();
+        }
+
+        try {
+            return userDao.findById(id).orElse(null);
+        }catch(RuntimeException e){
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
