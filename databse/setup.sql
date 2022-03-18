@@ -17,6 +17,10 @@
 
 ####################
 # Tables
+drop database if exists attendance;
+create database attendance default character set utf8mb4 collate utf8mb4_unicode_ci;
+use attendance;
+
 
 # table roll
 create table role
@@ -242,3 +246,16 @@ insert into roll_call(class_id) values (3);
 update attendance_record set check_status = true where roll_call_id = 4 and user_id = 4;
 update attendance_record set check_status = true where roll_call_id = 1 and user_id = 2;
 update attendance_record set check_status = false where roll_call_id = 1 and user_id = 2; # test cancel check
+
+# Will delete next time
+create table `test`
+(
+    `id` int,
+    `name` varchar(255),
+    `age` int
+);
+INSERT INTO test VALUES(1, 'yzy', 18);
+INSERT INTO test VALUES(2, 'wy', 12);
+INSERT INTO test VALUES(3, 'wayson', 17);
+INSERT INTO test VALUES(3, 'shutong', 12);
+INSERT INTO test VALUES(3, 'tianyu', 16);
