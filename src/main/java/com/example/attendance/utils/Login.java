@@ -34,6 +34,8 @@ public class Login {
         }else{
             if(findUser.getPassword().equals(user.getPassword())){
                 map.put("success", true);
+                map.put("id", findUser.getId());
+                map.put("name", findUser.getName());
                 map.put("token", "accesstoken");
                 if(findUser.getRole_id() == 1){
                     map.put("type", "professor");
