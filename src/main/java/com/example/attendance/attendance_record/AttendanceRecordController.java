@@ -43,6 +43,16 @@ public class AttendanceRecordController {
         return attendanceRecordService.getRecordByRollCallId(rollCallId);
     }
 
+    @PutMapping(path="/user/{id}/rollcall/{rid}")
+    public ResponseEntity<AttendanceRecord> updateRecordByComposeId(
+            @PathVariable(name="id") int userId, @PathVariable(name="rid") int rollCallId,
+            @RequestBody AttendanceRecord newRecord) {
+//        AttendanceRecord oldRecord = attendanceRecordService.getByComposeId(userId, rollCallId);
+////        oldRecord.setCheck_status(true);
+//        oldRecord.setCheck_status(newRecord.isCheck_status());
+//        oldRecord.setCheck_time(newRecord.getCheck_time());
+        return new ResponseEntity<>(attendanceRecordService.updateByComposeId(newRecord), HttpStatus.OK);
+    }
 
     @DeleteMapping(path="/user/{id}/rollcall/{rid}")
     public void deleteAttendanceRecordById(@PathVariable(name = "id") int userId, @PathVariable(name = "rid")int rollCallId) {

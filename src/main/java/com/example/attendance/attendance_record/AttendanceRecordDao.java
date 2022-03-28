@@ -17,6 +17,9 @@ public interface AttendanceRecordDao extends JpaRepository<AttendanceRecord, Att
     @Query(value = "SELECT * FROM attendance_record WHERE ROLL_CALL_ID = ?1", nativeQuery = true)
     List<AttendanceRecord> findByRollCallId(Integer rollCallId);
 
+    @Query(value = "SELECT * FROM attendance_record WHERE USER_ID = ?1 AND ROLL_CALL_ID = ?2", nativeQuery = true)
+    AttendanceRecord findByComposeId(Integer userId, Integer rollCallId);
+
     @Modifying
     @Query(value = "DELETE FROM attendance_record WHERE USER_ID = ?1 AND ROLL_CALL_ID = ?2", nativeQuery = true)
     void deleteByComposeId(int userId, int rollCallId);

@@ -1,5 +1,6 @@
 package com.example.attendance.attendance_record;
 
+import com.example.attendance.rollcall.RollCall;
 import com.example.attendance.services.Services;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -50,6 +51,10 @@ public class AttendanceRecordService implements Services<AttendanceRecord> {
         return userId;
     }
 
+    public AttendanceRecord getByComposeId(Integer userId, Integer rollCallId) {
+        return attendanceRecordDao.findByComposeId(userId, rollCallId);
+    }
+
     public List<AttendanceRecord> getRecordByRollCallId(Integer rollCallId) {
         return attendanceRecordDao.findByRollCallId(rollCallId);
     }
@@ -66,6 +71,9 @@ public class AttendanceRecordService implements Services<AttendanceRecord> {
         return null;
     }
 
+    public AttendanceRecord updateByComposeId(AttendanceRecord anObj) {
+        return attendanceRecordDao.save(anObj);
+    }
     @Override
     public AttendanceRecord updateAttrById(Integer anId, Map<String, String> anUpdateMap) {
         return null;
