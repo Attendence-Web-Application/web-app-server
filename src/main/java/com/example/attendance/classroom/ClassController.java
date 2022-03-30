@@ -15,14 +15,12 @@ import java.util.Map;
 @Slf4j
 @CrossOrigin
 public class ClassController {
+
     public static final String BASE_URL = "/class";
 
     @Autowired
     ClassServices classServices = new ClassServices();
 
-    public void test() {
-        System.out.println("within test");
-    }
     @PostMapping(path="/createClass", produces = "application/json")
     public ResponseEntity<Course> createClass(@RequestBody Course class_){
         log.info("[Create one class: " + class_ + " ]");
@@ -61,6 +59,7 @@ public class ClassController {
         }
         return new ResponseEntity<Course>(class_, HttpStatus.OK);
     }
+
     @DeleteMapping(path="getClass/{number}", produces = "application/json")
     public ResponseEntity<Map<String, Boolean>> deleteEmployeeByNumber(@PathVariable String number) {
         classServices.deleteByNumber(number);
@@ -69,6 +68,4 @@ public class ClassController {
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
-
-
 }

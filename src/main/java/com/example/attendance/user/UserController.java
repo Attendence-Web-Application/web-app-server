@@ -49,11 +49,11 @@ public class UserController {
         else{
             map.put("name", false);
         }
-
         return map;
     }
 
-
-
-
+    @GetMapping(path="/{id}")
+    public ResponseEntity<User> getById(@PathVariable (name="id") int userId) {
+        return new ResponseEntity<>(userServices.getById(userId), HttpStatus.OK);
+    }
 }
