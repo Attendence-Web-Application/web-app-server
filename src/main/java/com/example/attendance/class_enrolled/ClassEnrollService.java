@@ -37,7 +37,7 @@ public class ClassEnrollService implements Services<ClassEnroll> {
         return classEnrollDao.findByUserId(userId);
     }
 
-    public ClassEnroll getByClassId(Integer classId) {
+    public List<ClassEnroll> getByClassId(Integer classId) {
         return classEnrollDao.findByClassId(classId);
     }
 

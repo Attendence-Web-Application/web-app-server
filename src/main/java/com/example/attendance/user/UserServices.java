@@ -30,7 +30,6 @@ public class UserServices implements Services<User> {
         if(!userDao.existsById(id)){
             throw new NotFoundException();
         }
-
         try {
             return userDao.findById(id).orElse(null);
         }catch(RuntimeException e){

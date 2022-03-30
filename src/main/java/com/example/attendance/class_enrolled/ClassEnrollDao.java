@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ClassEnrollDao extends JpaRepository<ClassEnroll, ClassUserKey> {
+
     @Query(value = "SELECT * FROM class_enrolled WHERE USER_ID = ?1 AND CLASS_ID = ?2", nativeQuery = true)
     ClassEnroll findByComposeId(Integer userId, Integer classId);
 
@@ -14,7 +15,7 @@ public interface ClassEnrollDao extends JpaRepository<ClassEnroll, ClassUserKey>
     List<Integer> findByUserId(Integer userId);
 
     @Query(value = "SELECT * FROM class_enrolled WHERE CLASS_ID= ?1", nativeQuery = true)
-    ClassEnroll findByClassId(Integer classId);
+    List<ClassEnroll> findByClassId(Integer classId);
 
     @Modifying
     @Query(value = "DELETE FROM class_enrolled WHERE USER_ID = ?1 AND CLASS_ID = ?2", nativeQuery = true)

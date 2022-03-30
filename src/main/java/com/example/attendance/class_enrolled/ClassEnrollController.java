@@ -16,6 +16,7 @@ import java.util.Map;
 @Slf4j
 @CrossOrigin
 public class ClassEnrollController {
+
     public static final String BASE_URL = "/class_enrolled";
 
     @Autowired
@@ -46,8 +47,8 @@ public class ClassEnrollController {
     }
 
     @GetMapping(path="/getClassEnroll/class{classId}", produces = "application/json")
-    public ResponseEntity<ClassEnroll> getClassEnrollByClassId(@PathVariable Integer classId){
-        return new ResponseEntity<>(classEnrollService.getByClassId(classId), HttpStatus.OK);
+    public List<ClassEnroll> getClassEnrollByClassId(@PathVariable Integer classId){
+        return classEnrollService.getByClassId(classId);
     }
 
     /*
@@ -68,7 +69,6 @@ public class ClassEnrollController {
         return new ResponseEntity<Class>(class_, HttpStatus.OK);
     }
      */
-
 
     @DeleteMapping(path="/getClassEnroll/{userId}_{classId}", produces = "application/json")
     public ResponseEntity<Map<String, Boolean>> deleteClassEnrollByComposeId(@PathVariable Integer userId, @PathVariable Integer classId) {
