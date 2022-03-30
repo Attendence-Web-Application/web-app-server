@@ -15,6 +15,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 public class RollCallController {
+
     public static final String BASE_URL = "/rollCall";
 
     @Autowired

@@ -17,6 +17,7 @@ public class RollCallService implements Services<RollCall> {
 
     @Autowired
     RollCallDao rollCallDao;
+
     @Override
     public RollCall addOne(RollCall anObj) {
         return null;

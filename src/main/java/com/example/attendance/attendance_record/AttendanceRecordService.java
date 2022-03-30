@@ -31,14 +31,8 @@ public class AttendanceRecordService implements Services<AttendanceRecord> {
         return null;
     }
 
-    public List<Integer> getRollCallIdByUserId(Integer userId) {
-        List<AttendanceRecord> records = attendanceRecordDao.findByUserId(userId);
-        List<Integer> rollCallId = new ArrayList<>();
-        Iterator<AttendanceRecord> itr = records.iterator();
-        while (itr.hasNext()) {
-            rollCallId.add(itr.next().getId().getRollCallId());
-        }
-        return rollCallId;
+    public List<AttendanceRecord> getRollCallIdByUserId(Integer userId) {
+        return attendanceRecordDao.findByUserId(userId);
     }
 
     public List<Integer> getUserByRollCallId(Integer rollCallId) {
@@ -66,6 +60,7 @@ public class AttendanceRecordService implements Services<AttendanceRecord> {
     public List<AttendanceRecord> findAll() {
         return attendanceRecordDao.findAll();
     }
+
     @Override
     public AttendanceRecord updateById(Integer anId, AttendanceRecord anObj) {
         return null;
@@ -74,6 +69,7 @@ public class AttendanceRecordService implements Services<AttendanceRecord> {
     public AttendanceRecord updateByComposeId(AttendanceRecord anObj) {
         return attendanceRecordDao.save(anObj);
     }
+
     @Override
     public AttendanceRecord updateAttrById(Integer anId, Map<String, String> anUpdateMap) {
         return null;

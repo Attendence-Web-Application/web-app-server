@@ -29,7 +29,7 @@ public class AttendanceRecordController {
         return attendanceRecordService.findAll();
     }
     @GetMapping(path="/user/{id}")
-    public List<Integer> getRollCallByUserId(@PathVariable(name = "id") int userId) {
+    public List<AttendanceRecord> getRollCallByUserId(@PathVariable(name = "id") int userId) {
         return attendanceRecordService.getRollCallIdByUserId(userId);
     }
 
@@ -41,6 +41,11 @@ public class AttendanceRecordController {
     @GetMapping(path="/rollCall/{id}")
     public List<AttendanceRecord> getRecordByRollCallId(@PathVariable(name = "id") int rollCallId) {
         return attendanceRecordService.getRecordByRollCallId(rollCallId);
+    }
+
+    @GetMapping(path="/user/{id}/rollcall/{rid}")
+    public ResponseEntity<AttendanceRecord> getRecordByComposeId(@PathVariable(name="id") int userId, @PathVariable(name="rid") int rollCallId) {
+        return new ResponseEntity<>(attendanceRecordService.getByComposeId(userId, rollCallId), HttpStatus.OK);
     }
 
     @PutMapping(path="/user/{id}/rollcall/{rid}")

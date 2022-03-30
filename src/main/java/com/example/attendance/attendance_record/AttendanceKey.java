@@ -13,9 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttendanceKey implements Serializable {
-
     @Column(name="roll_call_id")
     private int rollCallId;
+
     @Column(name = "user_id")
     private int userId;
 }

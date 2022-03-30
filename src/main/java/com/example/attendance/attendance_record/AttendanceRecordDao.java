@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface AttendanceRecordDao extends JpaRepository<AttendanceRecord, AttendanceKey> {
+
     @Query(value = "SELECT * FROM attendance_record WHERE USER_ID = ?1", nativeQuery = true)
     List<AttendanceRecord> findByUserId(Integer userId);
 

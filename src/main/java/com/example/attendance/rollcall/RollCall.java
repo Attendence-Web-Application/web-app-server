@@ -30,17 +30,4 @@ public class RollCall {
     private int attendance_count = 0;
 
     private String attendance_rate = "0";
-
 }
-/*
-create table roll_call
-(
-    id               int auto_increment
-        primary key,
-    class_id         int not null ,
-    expired_times    datetime,
-    attendance_count int default 0,         # the count of the students who has already checked in
-    attendance_rate  varchar(255) default 0, # attendance rate for this roll call
-    foreign key (class_id) references class (id)
-);
- */
