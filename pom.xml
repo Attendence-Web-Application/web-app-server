@@ -13,7 +13,6 @@
     <artifactId>Attendance</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>Attendance</name>
     <description>Attendance CS6620 Final Project</description>
 
