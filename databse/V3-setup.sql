@@ -15,7 +15,7 @@
 # update_attendance_record: When a roll call start, then put all the students(no professor) with uncheck status into the attendance record
 # update_attendance_rate: When a record changed, then update the attendance rate of the roll call and student, the records are not allowed to change after the expired time
 #
-# delete
+# delete_record: update related attendance rate in class_enrolled table
 # delete_roll_coll: delete the related record and update the attendance times in class table when delete a roll call
 
 
@@ -179,6 +179,36 @@ begin
     set attendance_rate = roll_call.attendance_count /
                           (select size from class where class.id = roll_call.class_id)
     where roll_call.id = NEW.roll_call_id;
+end $
+Delimiter ;
+
+# update related attendance rate in class_enrolled table
+Delimiter $
+create trigger delete_record
+    before  delete on attendance_record
+    for each row
+begin
+    # cancel check if checked
+    if (OLD.check_status = true) then
+        # update the student attendance count
+        update class_enrolled
+        set attendance_times = attendance_times - 1
+        where class_enrolled.class_id = (select class_id from roll_call where roll_call.id = OLD.roll_call_id)
+          and class_enrolled.user_id = OLD.user_id;
+        # update the roll call attendance count
+#         update roll_call set attendance_count = attendance_count - 1 where roll_call.id = OLD.roll_call_id;
+    end if;
+    # update the student attendance rate
+    update class_enrolled
+    set attendance_rate = class_enrolled.attendance_times /
+                          ((select attendance_times from class where class.id = class_enrolled.class_id) - 1)
+    where class_enrolled.class_id = (select class_id from roll_call where id = OLD.roll_call_id)
+      and class_enrolled.user_id = OLD.user_id;
+    # update the roll call attendance rate
+#     update roll_call
+#     set attendance_rate = roll_call.attendance_count /
+#                           (select size from class where class.id = roll_call.class_id)
+#     where roll_call.id = OLD.roll_call_id;
 end $
 Delimiter ;
 
