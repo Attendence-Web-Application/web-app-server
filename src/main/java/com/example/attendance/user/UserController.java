@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -55,5 +56,20 @@ public class UserController {
     @GetMapping(path="/{id}")
     public ResponseEntity<User> getById(@PathVariable (name="id") int userId) {
         return new ResponseEntity<>(userServices.getById(userId), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/nameIdPair")
+    public Map<Integer, String> getAllNameIdPair() {
+        List<User> users = userServices.findAll();
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < users.size(); i++) {
+            map.put(users.get(i).getId(), users.get(i).getName());
+        }
+        return map;
+    }
+    @GetMapping(path="/getAll")
+    public List<User> getAll() {
+        List<User> users = userServices.findAll();
+        return users;
     }
 }

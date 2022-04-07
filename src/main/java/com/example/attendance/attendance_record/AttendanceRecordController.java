@@ -63,4 +63,5 @@ public class AttendanceRecordController {
     public void deleteAttendanceRecordById(@PathVariable(name = "id") int userId, @PathVariable(name = "rid")int rollCallId) {
         attendanceRecordService.deleteByComposeId(userId, rollCallId);
     }
+
 }

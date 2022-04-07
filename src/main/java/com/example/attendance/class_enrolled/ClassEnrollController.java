@@ -1,12 +1,12 @@
 package com.example.attendance.class_enrolled;
 
-import com.example.attendance.classroom.ClassController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class ClassEnrollController {
 
     @Autowired
     ClassEnrollService classEnrollService;
-    ClassController classController = new ClassController();
+//    ClassController classController = new ClassController();
 
     @PostMapping(path="/createEnroll", produces = "application/json")
     public ResponseEntity<ClassEnroll> createClassEnroll(@RequestBody ClassEnroll classEnroll){
@@ -49,6 +49,16 @@ public class ClassEnrollController {
     @GetMapping(path="/getClassEnroll/class{classId}", produces = "application/json")
     public List<ClassEnroll> getClassEnrollByClassId(@PathVariable Integer classId){
         return classEnrollService.getByClassId(classId);
+    }
+
+    @GetMapping(path="/getUser/class{classId}", produces = "application/json")
+    public List<Integer> getUserByClassId(@PathVariable Integer classId){
+        List<ClassEnroll> enrolls = classEnrollService.getByClassId(classId);
+        List<Integer> users = new ArrayList<>();
+        for (int i = 0; i < enrolls.size(); i++) {
+            users.add(enrolls.get(i).getId().getUserId());
+        }
+        return users;
     }
 
     /*

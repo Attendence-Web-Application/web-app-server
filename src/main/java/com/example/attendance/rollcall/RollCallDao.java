@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RollCallDao extends JpaRepository<RollCall, Integer> {
-//    @Query(value = "SELECT * FROM roll_call WHERE ID = ?1 AND CLASS_ID = ?2", nativeQuery = true)
-//    List<RollCall> findByRollCallIdUserId(Integer rollCallId, Integer userId);
+    @Query(value = "SELECT * FROM roll_call WHERE CLASS_ID = ?1", nativeQuery = true)
+    List<RollCall> findByClassId(Integer classId);
 }
