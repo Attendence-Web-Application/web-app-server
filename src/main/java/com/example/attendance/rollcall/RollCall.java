@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Table(name = "roll_call")
 public class RollCall {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull

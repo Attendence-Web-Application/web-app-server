@@ -38,6 +38,10 @@ public class RollCallController {
         return new ResponseEntity<>(rollCall, HttpStatus.OK);
     }
 
+    @GetMapping(path="/classId/{id}")
+    public ResponseEntity<List<RollCall>> getRollCallByClassId(@PathVariable(name = "id") int classId) {
+        return new ResponseEntity<>(rollCallService.getByClassId(classId), HttpStatus.OK);
+    }
     @PutMapping(path = "/{id}")
     public ResponseEntity<RollCall> updateRollCallById(@RequestBody RollCall rollCall, @PathVariable int id) {
         RollCall oldRollCall = rollCallService.getById(id);

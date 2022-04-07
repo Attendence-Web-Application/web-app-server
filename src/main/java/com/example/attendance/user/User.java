@@ -35,9 +35,9 @@ public class User {
     @NotNull
     private int role_id;
 
-    @ManyToMany
-    @JoinTable(name = "class_enrolled", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "class_id"))
-    List<Course> enrollClasses;
+//    @ManyToMany
+//    @JoinTable(name = "class_enrolled", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "class_id"))
+//    List<Course> enrollClasses;
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "user")

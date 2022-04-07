@@ -42,6 +42,10 @@ public class UserServices implements Services<User> {
         return null;
     }
 
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
     @Override
     public User updateById(Integer anId, User anObj) {
         return null;

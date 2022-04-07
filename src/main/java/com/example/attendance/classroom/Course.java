@@ -36,6 +36,9 @@ public class Course {
 
     private int attendance_times;
 
+    @NotNull
+    private int user_id;
+
 //    @ManyToMany(mappedBy = "enrollClasses")
 //    List<User> enrolled;
 

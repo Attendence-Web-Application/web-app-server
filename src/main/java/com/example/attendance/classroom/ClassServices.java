@@ -33,8 +33,16 @@ public class ClassServices implements Services<Course> {
         return classDao.findById(anId).get();
     }
 
+    public List<Course> getByUserId(Integer anId) {
+        return classDao.findByUserId(anId);
+    }
+
     public List<Course> getByNumber(String number) {
         return classDao.findByNumber(number);
+    }
+
+    public List<Course> getByTitle(String title) {
+        return classDao.findByTitle(title);
     }
 
     @Override
@@ -68,7 +76,9 @@ public class ClassServices implements Services<Course> {
 
     @Override
     public Course deleteById(Integer anId) {
-        return null;
+        Course course = getById(anId);
+        classDao.deleteById(anId);
+        return course;
     }
 
     public void deleteByNumber(String number) {

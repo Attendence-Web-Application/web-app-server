@@ -43,6 +43,17 @@ public class ClassController {
         return new ResponseEntity<>(classServices.getByNumber(number), HttpStatus.OK);
     }
 
+    @GetMapping(path="/getClassByTitle/{title}", produces = "application/json")
+    public ResponseEntity<List<Course>> getClassByTitle(@PathVariable String title){
+        return new ResponseEntity<>(classServices.getByTitle(title), HttpStatus.OK);
+    }
+
+
+    @GetMapping(path="/userId/{id}", produces = "application/json")
+    public ResponseEntity<List<Course>> getClassByUser(@PathVariable(name = "id") int userId) {
+        return new ResponseEntity<>(classServices.getByUserId(userId), HttpStatus.OK);
+    }
+
     @PutMapping(path="getClass/{number}", produces = "application/json")
     public ResponseEntity<Course> updateClassByNumber(@PathVariable String number, @RequestBody Course classDetails) {
         List<Course> list = classServices.getByNumber(number);
@@ -60,10 +71,20 @@ public class ClassController {
         return new ResponseEntity<Course>(class_, HttpStatus.OK);
     }
 
+    /*
     @DeleteMapping(path="getClass/{number}", produces = "application/json")
-    public ResponseEntity<Map<String, Boolean>> deleteEmployeeByNumber(@PathVariable String number) {
+    public ResponseEntity<Map<String, Boolean>> deleteCourseByNumber(@PathVariable String number) {
         classServices.deleteByNumber(number);
         System.out.println(number);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
+    }
+    */
+
+    @DeleteMapping(path="getClass/Id{id}", produces = "application/json")
+    public ResponseEntity<Map<String, Boolean>> deleteCourseById(@PathVariable(name = "id") int classId) {
+        classServices.deleteById(classId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);

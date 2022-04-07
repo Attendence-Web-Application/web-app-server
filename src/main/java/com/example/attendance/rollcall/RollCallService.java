@@ -28,6 +28,10 @@ public class RollCallService implements Services<RollCall> {
         return rollCallDao.findById(anId).get();
     }
 
+    public List<RollCall> getByClassId(Integer anId) {
+        return rollCallDao.findByClassId(anId);
+    }
+
     @Override
     public List<RollCall> getAll(Map<String, String> aFilter) {
         return null;
