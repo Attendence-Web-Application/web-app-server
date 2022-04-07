@@ -15,8 +15,8 @@
 # update_attendance_record: When a roll call start, then put all the students(no professor) with uncheck status into the attendance record
 # update_attendance_rate: When a record changed, then update the attendance rate of the roll call and student, the records are not allowed to change after the expired time
 #
-# delete_record: update related attendance rate in class_enrolled table
-# delete_roll_coll: delete the related record and update the attendance times in class table when delete a roll call
+# delete_roll_call: delete the related record when delete a roll call
+# delete_class: delete the related rows in class_enrolled table, roll_coll table, attendance_record table
 
 
 ####################
@@ -182,45 +182,26 @@ begin
 end $
 Delimiter ;
 
-# update related attendance rate in class_enrolled table
+# delete the related record and class table when delete a roll call
 Delimiter $
-create trigger delete_record
-    before  delete on attendance_record
-    for each row
-begin
-    # cancel check if checked
-    if (OLD.check_status = true) then
-        # update the student attendance count
-        update class_enrolled
-        set attendance_times = attendance_times - 1
-        where class_enrolled.class_id = (select class_id from roll_call where roll_call.id = OLD.roll_call_id)
-          and class_enrolled.user_id = OLD.user_id;
-        # update the roll call attendance count
-#         update roll_call set attendance_count = attendance_count - 1 where roll_call.id = OLD.roll_call_id;
-    end if;
-    # update the student attendance rate
-    update class_enrolled
-    set attendance_rate = class_enrolled.attendance_times /
-                          ((select attendance_times from class where class.id = class_enrolled.class_id) - 1)
-    where class_enrolled.class_id = (select class_id from roll_call where id = OLD.roll_call_id)
-      and class_enrolled.user_id = OLD.user_id;
-    # update the roll call attendance rate
-#     update roll_call
-#     set attendance_rate = roll_call.attendance_count /
-#                           (select size from class where class.id = roll_call.class_id)
-#     where roll_call.id = OLD.roll_call_id;
-end $
-Delimiter ;
-
-# delete the related record and update the attendance times in class table when delete a roll call
-Delimiter $
-create trigger delete_roll_coll
+create trigger delete_roll_call
     before delete
     on roll_call
     for each row
 begin
-    update class set class.attendance_times = class.attendance_times - 1 where class.id = OLD.class_id;
     delete from attendance_record where attendance_record.roll_call_id = OLD.id;
+end $
+Delimiter ;
+
+# delete the related rows in class_enrolled table and roll_coll table
+Delimiter $
+create trigger delete_class
+    before delete
+    on class
+    for each row
+begin
+    delete from roll_call where roll_call.class_id = OLD.id;
+    delete from class_enrolled where class_enrolled.class_id = OLD.id;
 end $
 Delimiter ;
 
