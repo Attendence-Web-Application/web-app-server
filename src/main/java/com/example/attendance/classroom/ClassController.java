@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,16 @@ public class ClassController {
     public List<Course> getAll(){
         List<Course> allClass = classServices.findAll();
         return allClass;
+    }
+
+    @GetMapping("/getDistinctClassTitle")
+    public HashSet<String> getDistinctClassTitle() {
+        HashSet<String> res = new HashSet<>();
+        List<Course> allClass = classServices.findAll();
+        for (int i = 0; i < allClass.size(); i++) {
+            res.add(allClass.get(i).getTitle());
+        }
+        return res;
     }
 
     @GetMapping(path="/getClass/id{id}", produces = "application/json")
