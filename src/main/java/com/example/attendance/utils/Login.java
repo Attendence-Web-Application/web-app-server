@@ -23,7 +23,7 @@ public class Login {
     @Autowired
     UserDao userDao;
 
-    @PostMapping(path="/login", produces = "application/json")
+    @PostMapping(path="/user/login", produces = "application/json")
     public Map<String, Object> createUser(@RequestBody User user){
         Map<String, Object> map = new HashMap<>();
 
