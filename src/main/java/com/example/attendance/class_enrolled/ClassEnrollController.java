@@ -17,7 +17,7 @@ import java.util.Map;
 @CrossOrigin
 public class ClassEnrollController {
 
-    public static final String BASE_URL = "/class_enrolled";
+    public static final String BASE_URL = "/classEnrolled";
 
     @Autowired
     ClassEnrollService classEnrollService;
